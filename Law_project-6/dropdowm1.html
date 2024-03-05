@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        select {
+            cursor: pointer;
+            width: 300px;
+            height: 40px;
+            border-radius: 15px;
+            background-color: rgb(250, 250, 250);
+            box-shadow: 2px 4px 8px #c5c5c5;
+            border: none;
+            outline: none;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <select id="countries">
+            <option value="-1">Select Country</option>
+            <option value="IND">India</option>
+            <option value="US">America</option>
+            <option value="UK">England</option>
+        </select>
+
+        <select name="" id="states">
+            <option value="-1">Select State</option>
+        </select>
+    </div>
+
+    <script>
+        let country_states = [
+            {
+                country: "India",
+                code: "IND",
+                states: ["Andhra Pradesh", "Bihar", "Gujarat", "Karnataka"]
+            },
+            {
+                country: "America",
+                code: "US",
+                states: ["Florida", "Georgia", "Hawaii"]
+            },
+            {
+                country: "England",
+                code: "UK",
+                states: ["England", "Scotland", "Wales"]
+            }
+        ]
+
+        let countrySelect = document.querySelector('#countries');
+        let stateSelect = document.querySelector('#states');
+
+        countrySelect.onchange = function () {
+            stateSelect.options.length = 0;
+            if (countrySelect.value !== "-1") {
+                for (const country of country_states) {
+                    if (countrySelect.value === country.code) {
+                        let states = country.states;
+                        let op = document.createElement('option');
+                        op.value = "-1";
+                        op.innerText = "Select State";
+                        stateSelect.appendChild(op);
+                        for (const state of states) {
+                            let op = document.createElement('option');
+                            op.value = state;
+                            op.innerText = state;
+                            stateSelect.appendChild(op);
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

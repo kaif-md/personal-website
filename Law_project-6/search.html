@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lawyer Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container1 {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        #lawyer-info {
+            display: none;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container1">
+        <h1>Find a Lawyer</h1>
+        <label for="domain">Select a Domain:</label>
+        <select id="domain">
+            <option value="" disabled selected>Select a Domain</option>
+            <option value="criminal">Criminal Law</option>
+            <option value="family">Family Law</option>
+            <option value="immigration">Immigration Law</option>
+        </select>
+
+        <label for="state" id="state-label" style="display: none;">Select a State:</label>
+        <select id="state" style="display: none;">
+            <option value="" disabled selected>Select a State</option>
+            <!-- State options will be populated dynamically using JavaScript -->
+        </select>
+
+        <label for="lawyer" id="lawyer-label" style="display: none;">Select a Lawyer:</label>
+        <select id="lawyer" style="display: none;">
+            <option value="" disabled selected>Select a Lawyer</option>
+            <!-- Lawyer options will be populated dynamically using JavaScript -->
+        </select>
+
+        <button id="submit-button" style="display: none;">Show Lawyer Information</button>
+        <div id="lawyer-info">
+            <h2>Lawyer Information</h2>
+            <p id="lawyer-details"></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const domainSelect = document.getElementById('domain');
+            const stateSelect = document.getElementById('state');
+            const lawyerSelect = document.getElementById('lawyer');
+            const stateLabel = document.getElementById('state-label');
+            const lawyerLabel = document.getElementById('lawyer-label');
+            const submitButton = document.getElementById('submit-button');
+            const lawyerInfo = document.getElementById('lawyer-info');
+            const lawyerDetails = document.getElementById('lawyer-details');
+
+            const lawyersData = {
+                criminal: {
+                    "New York": ["John Doe", "Alice Johnson", "Mark Davis"],
+                    "California": ["Jane Smith", "Robert Brown", "Sara Wilson"],
+                    "Florida": ["David Lee", "Linda Davis", "Michael Chen"]
+                },
+                family: {
+                    "New York": ["John Doe", "Alice Johnson", "Mark Davis"],
+                    "California": ["Jane Smith", "Robert Brown", "Sara Wilson"],
+                    "Florida": ["David Lee", "Linda Davis", "Michael Chen"]
+                },
+                immigration: {
+                    "New York": ["John Doe", "Alice Johnson", "Mark Davis"],
+                    "California": ["Jane Smith", "Robert Brown", "Sara Wilson"],
+                    "Florida": ["David Lee", "Linda Davis", "Michael Chen"]
+                }
+            };
+
+            domainSelect.addEventListener('change', function() {
+                stateSelect.innerHTML = '<option value="" disabled selected>Select a State</option>';
+                lawyerSelect.innerHTML = '<option value="" disabled selected>Select a Lawyer</option>';
+                const selectedDomain = domainSelect.value;
+                const states = Object.keys(lawyersData[selectedDomain]);
+
+                if (states.length > 0) {
+                    stateLabel.style.display = 'block';
+                    stateSelect.style.display = 'block';
+                    lawyerLabel.style.display = 'none';
+                    lawyerSelect.style.display = 'none';
+                    submitButton.style.display = 'none';
+
+                    states.forEach(state => {
+                        const option = document.createElement('option');
+                        option.value = state;
+                        option.textContent = state;
+                        stateSelect.appendChild(option);
+                    });
+                } else {
+                    stateLabel.style.display = 'none';
+                    stateSelect.style.display = 'none';
+                    lawyerLabel.style.display = 'none';
+                    lawyerSelect.style.display = 'none';
+                    submitButton.style.display = 'none';
+                    lawyerInfo.style.display = 'none';
+                }
+            });
+
+            stateSelect.addEventListener('change', function() {
+                lawyerSelect.innerHTML = '<option value="" disabled selected>Select a Lawyer</option>';
+                const selectedDomain = domainSelect.value;
+                const selectedState = stateSelect.value;
+                const lawyers = lawyersData[selectedDomain][selectedState];
+
+                if (lawyers && lawyers.length > 0) {
+                    lawyerLabel.style.display = 'block';
+                    lawyerSelect.style.display = 'block';
+                    submitButton.style.display = 'none';
+
+                    lawyers.forEach(lawyerName => {
+                        const option = document.createElement('option');
+                        option.value = lawyerName;
+                        option.textContent = lawyerName;
+                        lawyerSelect.appendChild(option);
+                    });
+                } else {
+                    lawyerLabel.style.display = 'none';
+                    lawyerSelect.style.display = 'none';
+                    submitButton.style.display = 'none';
+                    lawyerInfo.style.display = 'none';
+                }
+            });
+
+            lawyerSelect.addEventListener('change', function() {
+                submitButton.style.display = 'block';
+            });
+
+            submitButton.addEventListener('click', function() {
+                const selectedLawyer = lawyerSelect.value;
+                lawyerDetails.textContent = Selected Lawyer: ${selectedLawyer};
+                lawyerInfo.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lawyer Information</title>
+    <style>
+        /* Add your CSS styles for responsive design here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container1 {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        #lawyer-info {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container1">
+        <h1>Find a Lawyer</h1>
+        <label for="domain">Select a Domain:</label>
+        <select id="domain">
+            <option value="criminal">Criminal Law</option>
+            <option value="family">Family Law</option>
+            <option value="immigration">Immigration Law</option>
+        </select>
+        <button id="submit-button">Show All Lawyers</button>
+        <div id="lawyer-info">
+            <h2>Lawyer Information</h2>
+            <ul id="lawyers-list"></ul>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to display all lawyers' information based on the selected domain
+        const domainSelect = document.getElementById('domain');
+        const lawyerInfo = document.getElementById('lawyer-info');
+        const lawyersList = document.getElementById('lawyers-list');
+        const submitButton = document.getElementById('submit-button');
+
+        const lawyers = {
+            criminal: [
+                { name: 'John Doe', location: 'New York, NY', contact: 'johndoe@example.com' },
+                { name: 'Alice Johnson', location: 'Los Angeles, CA', contact: 'alice@example.com' },
+                { name: 'Alice Johnson', location: 'Los Angeles, CA', contact: 'alice@example.com' },
+                { name: 'John Doe', location: 'New York, NY', contact: 'johndoe@example.com' },
+                { name: 'Alice Johnson', location: 'Los Angeles, CA', contact: 'alice@example.com' },
+                { name: 'Alice Johnson', location: 'Los Angeles, CA', contact: 'alice@example.com' },
+                { name: 'John Doe', location: 'New York, NY', contact: 'johndoe@example.com' },
+                { name: 'Alice Johnson', location: 'Los Angeles, CA', contact: 'alice@example.com' },
+                { name: 'Alice Johnson', location: 'Los Angeles, CA', contact: 'alice@example.com' },
+                { name: 'Alice Johnson', location: 'Los Angeles, CA', contact: 'alice@example.com' }
+            ],
+            family: [
+                { name: 'Jane Smith', location: 'Chicago, IL', contact: 'janesmith@example.com' },
+                { name: 'Robert Brown', location: 'Houston, TX', contact: 'robert@example.com' },
+                { name: 'Alice Johnson', location: 'Los Angeles, CA', contact: 'alice@example.com' },
+                { name: 'John Doe', location: 'New York, NY', contact: 'johndoe@example.com' },
+                { name: 'Alice Johnson', location: 'Los Angeles, CA', contact: 'alice@example.com' },
+                { name: 'Alice Johnson', location: 'Los Angeles, CA', contact: 'alice@example.com' },
+                { name: 'John Doe', location: 'New York, NY', contact: 'johndoe@example.com' },
+                { name: 'Alice Johnson', location: 'Los Angeles, CA', contact: 'alice@example.com' },
+                { name: 'Alice Johnson', location: 'Los Angeles, CA', contact: 'alice@example.com' },
+                { name: 'Alice Johnson', location: 'Los Angeles, CA', contact: 'alice@example.com' }
+            ],
+            immigration: [
+                { name: 'David Lee', location: 'San Francisco, CA', contact: 'davidlee@example.com' },
+                { name: 'Maria Rodriguez', location: 'Miami, FL', contact: 'maria@example.com' },
+                { name: 'Alice Johnson', location: 'Los Angeles, CA', contact: 'alice@example.com' },
+                { name: 'John Doe', location: 'New York, NY', contact: 'johndoe@example.com' },
+                { name: 'Alice Johnson', location: 'Los Angeles, CA', contact: 'alice@example.com' },
+                { name: 'Alice Johnson', location: 'Los Angeles, CA', contact: 'alice@example.com' },
+                { name: 'John Doe', location: 'New York, NY', contact: 'johndoe@example.com' },
+                { name: 'Alice Johnson', location: 'Los Angeles, CA', contact: 'alice@example.com' },
+                { name: 'Alice Johnson', location: 'Los Angeles, CA', contact: 'alice@example.com' },
+                { name: 'Alice Johnson', location: 'Los Angeles, CA', contact: 'alice@example.com' }
+            ]
+        };
+
+        submitButton.addEventListener('click', function() {
+            const selectedDomain = domainSelect.value;
+            const selectedLawyers = lawyers[selectedDomain];
+
+            // Clear the previous list of lawyers
+            lawyersList.innerHTML = '';
+
+            if (selectedLawyers) {
+                selectedLawyers.forEach(lawyer => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `<strong>Name:</strong> ${lawyer.name}<br><strong>Location:</strong> ${lawyer.location}<br><strong>Contact:</strong> ${lawyer.contact}<br><br>`;
+                    lawyersList.appendChild(listItem);
+                });
+            }
+
+            // Show the lawyer information
+            lawyerInfo.style.display = 'block';
+        });
+    </script>
+</body>
+</html>

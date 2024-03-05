@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lawyer Information</title>
+    <style>
+        /* Add your CSS styles for responsive design here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container1 {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        #lawyer-info {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container1">
+        <h1>Find a Lawyer</h1>
+        <label for="domain">Select a Domain:</label>
+        <select id="domain">
+            <option value="criminal">Criminal Law</option>
+            <option value="family">Family Law</option>
+            <option value="immigration">Immigration Law</option>
+        </select>
+        <button id="submit-button">Submit</button>
+        <div id="lawyer-info">
+            <h2>Lawyer Information</h2>
+            <p><strong>Name:</strong> <span id="lawyer-name"></span></p>
+            <p><strong>Location:</strong> <span id="lawyer-location"></span></p>
+            <p><strong>Contact:</strong> <span id="lawyer-contact"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to display lawyer information based on the selected domain
+        const domainSelect = document.getElementById('domain');
+        const lawyerInfo = document.getElementById('lawyer-info');
+        const lawyerName = document.getElementById('lawyer-name');
+        const lawyerLocation = document.getElementById('lawyer-location');
+        const lawyerContact = document.getElementById('lawyer-contact');
+        const submitButton = document.getElementById('submit-button');
+
+        submitButton.addEventListener('click', function() {
+            const selectedDomain = domainSelect.value;
+            if (selectedDomain === 'criminal') {
+                lawyerName.textContent = 'John Doe';
+                lawyerLocation.textContent = 'New York, NY';
+                lawyerContact.textContent = 'johndoe@example.com';
+            } else if (selectedDomain === 'family') {
+                lawyerName.textContent = 'Jane Smith';
+                lawyerLocation.textContent = 'Los Angeles, CA';
+                lawyerContact.textContent = 'janesmith@example.com';
+            } else if (selectedDomain === 'immigration') {
+                lawyerName.textContent = 'David Lee';
+                lawyerLocation.textContent = 'San Francisco, CA';
+                lawyerContact.textContent = 'davidlee@example.com';
+            }
+
+            // Show the lawyer information
+            lawyerInfo.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
